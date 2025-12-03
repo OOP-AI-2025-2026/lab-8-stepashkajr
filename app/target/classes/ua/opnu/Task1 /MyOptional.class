@@ -1,0 +1,43 @@
+package ua.opnu.Task1;
+
+public class MyOptional<T> {
+    private T value;
+    private boolean present;
+
+    public MyOptional() {
+        this.present = false;
+    }
+
+    public MyOptional(T value) {
+        if (value == null) {
+            throw new IllegalArgumentException("MyOptional не приймає null");
+        } else {
+            this.value = value;
+            this.present = true;
+        }
+    }
+
+    public boolean isPresent() {
+        return this.present;
+    }
+
+    public boolean isEmpty() {
+        return !this.isPresent();
+    }
+
+    public T get() {
+        if (!this.present) {
+            throw new IllegalStateException("Значення відсутнє");
+        } else {
+            return this.value;
+        }
+    }
+
+    public T orElse(T defaultValue) {
+        return (T)(this.present ? this.value : defaultValue);
+    }
+
+    public String toString() {
+        return this.present ? "MyOptional[value=" + String.valueOf(this.value) + "]" : "MyOptional[empty]";
+    }
+}

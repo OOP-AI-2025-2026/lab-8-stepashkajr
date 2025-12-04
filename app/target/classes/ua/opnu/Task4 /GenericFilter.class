@@ -1,0 +1,20 @@
+package ua.opnu.Task4;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+public class GenericFilter {
+    public static <T> T[] filter(T[] input, Predicate<T> predicate) {
+        T[] result = (T[])((Object[])Array.newInstance(input.getClass().getComponentType(), input.length));
+        int counter = 0;
+
+        for(T element : input) {
+            if (predicate.test(element)) {
+                result[counter] = element;
+                ++counter;
+            }
+        }
+
+        return (T[])Arrays.copyOfRange(result, 0, counter);
+    }
+}

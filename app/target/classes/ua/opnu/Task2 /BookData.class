@@ -1,0 +1,44 @@
+package ua.opnu.Task2;
+
+public class BookData implements Comparable<BookData> {
+    private String title;
+    private String author;
+    private int reviews;
+    private double total;
+
+    public BookData(String title, String author, int reviews, double total) {
+        this.title = title;
+        this.author = author;
+        this.reviews = reviews;
+        this.total = total;
+    }
+
+    public double getRating() {
+        return this.reviews > 0 ? this.total / (double)this.reviews : (double)0.0F;
+    }
+
+    public int compareTo(BookData other) {
+        int ratingComparison = Double.compare(other.getRating(), this.getRating());
+        return ratingComparison == 0 ? this.title.compareTo(other.title) : ratingComparison;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public int getReviews() {
+        return this.reviews;
+    }
+
+    public double getTotal() {
+        return this.total;
+    }
+
+    public String toString() {
+        return String.format("BookData{title='%s', author='%s', rating=%.2f}", this.title, this.author, this.getRating());
+    }
+}
